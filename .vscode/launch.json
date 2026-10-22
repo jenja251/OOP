@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug bakery (GDB)",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/bakery.exe",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "environment": [{ "name": "PATH", "value": "C:/msys64/ucrt64/bin;${env:PATH}" }],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "miDebuggerPath": "C:/msys64/ucrt64/bin/gdb.exe",
+      "preLaunchTask": "Build bakery (GCC)"
+    }
+  ]
+}
