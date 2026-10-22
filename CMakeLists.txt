@@ -13,7 +13,7 @@ if(MSVC)
 else()
     target_compile_options(bakery_lib PUBLIC -Wall -Wextra -Wpedantic)
 endif()
-add_executable(bakery src/main.cpp)
+add_executable(bakery src/main.cpp src/console_app.cpp)
 target_link_libraries(bakery PRIVATE bakery_lib)
 
 include(CTest)

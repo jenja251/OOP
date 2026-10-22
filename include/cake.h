@@ -7,6 +7,7 @@ public:
          const std::string& decor, double decorPrice);
     double getPrice() const override;
     void printDetails() const override;
+    std::unique_ptr<Product> clone() const override;
     int getLayers() const;
     const std::string& getDecor() const;
     double getDecorPrice() const;

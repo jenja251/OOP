@@ -7,6 +7,7 @@ public:
            const std::string& filling, double fillingSurcharge);
     double getPrice() const override;
     void printDetails() const override;
+    std::unique_ptr<Product> clone() const override;
     const std::string& getFilling() const;
     double getFillingSurcharge() const;
     void setFilling(const std::string& filling);

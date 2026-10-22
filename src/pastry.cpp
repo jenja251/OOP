@@ -10,6 +10,7 @@ Pastry::Pastry(const std::string& name, double basePrice,
     setFillingSurcharge(fillingSurcharge);
 }
 double Pastry::getPrice() const { return getBasePrice() + fillingSurcharge_; }
+std::unique_ptr<Product> Pastry::clone() const { return std::make_unique<Pastry>(*this); }
 void Pastry::printDetails() const { std::cout << "Начинка: " << filling_; }
 const std::string& Pastry::getFilling() const { return filling_; }
 double Pastry::getFillingSurcharge() const { return fillingSurcharge_; }

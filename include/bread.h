@@ -7,6 +7,7 @@ public:
           const std::string& doughType, double weightKg);
     double getPrice() const override;
     void printDetails() const override;
+    std::unique_ptr<Product> clone() const override;
     const std::string& getDoughType() const;
     double getWeightKg() const;
     void setDoughType(const std::string& type);

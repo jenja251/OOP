@@ -1,5 +1,6 @@
 #include "cart.h"
 #include "product_factory.h"
+#include "console_app.h"
 #include <exception>
 #include <iostream>
 #ifdef _WIN32
@@ -9,10 +10,7 @@
 #include <windows.h>
 #endif
 
-int main() {
-#ifdef _WIN32
-    SetConsoleOutputCP(CP_UTF8);
-#endif
+int runDemo() {
     try {
         Cart cart;
         cart.addItem(ProductFactory::createProduct("bread", "Хлеб ржаной", 120, "ржаное", 0.5), 2);
@@ -51,6 +49,25 @@ int main() {
         emptyCart.printReceipt();
     } catch (const std::exception& error) {
         std::cerr << "Непредвиденная ошибка: " << error.what() << "\n";
+        return 1;
+    }
+    return 0;
+}
+
+int main(int argc, char* argv[]) {
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+#endif
+    try {
+        if (argc == 2 && std::string(argv[1]) == "--demo") return runDemo();
+        if (argc != 1) {
+            std::cout << "Запуск: bakery [--demo]\nБез аргументов — интерактивное меню.\n";
+            return 1;
+        }
+        runInteractive();
+    } catch (const std::exception& error) {
+        std::cerr << "Непредвиденная ошибка: " << error.what() << '\n';
         return 1;
     }
     return 0;

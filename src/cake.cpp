@@ -11,6 +11,7 @@ Cake::Cake(const std::string& name, double pricePerLayer, int layers,
     setDecorPrice(decorPrice);
 }
 double Cake::getPrice() const { return getBasePrice() * layers_ + decorPrice_; }
+std::unique_ptr<Product> Cake::clone() const { return std::make_unique<Cake>(*this); }
 void Cake::printDetails() const {
     std::cout << "Слоёв: " << layers_ << ", декор: " << decor_;
 }

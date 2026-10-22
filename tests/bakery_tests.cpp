@@ -46,6 +46,14 @@ int main() {
         check(mutableBread.getWeightKg() == 0.5, "Failed setter changed state");
         mutableBread.setWeightKg(1);
         check(mutableBread.getPrice() == 120, "Setter did not affect price");
+        auto breadCopy = mutableBread.clone();
+        check(dynamic_cast<Bread*>(breadCopy.get()) != nullptr, "Bread clone lost type");
+        mutableBread.setWeightKg(2);
+        check(breadCopy->getPrice() == 120, "Clone shares mutable state");
+        auto pastryCopy = ProductFactory::createProduct("pastry", "Pastry", 65, "cherry", 15)->clone();
+        check(dynamic_cast<Pastry*>(pastryCopy.get()) != nullptr && pastryCopy->getPrice() == 80, "Pastry clone");
+        auto cakeCopy = ProductFactory::createProduct("cake", "Cake", 300, "berries", 200, 3)->clone();
+        check(dynamic_cast<Cake*>(cakeCopy.get()) != nullptr && cakeCopy->getPrice() == 1100, "Cake clone");
         Cart cart;
         check(cart.getTotalPrice() == 0, "Empty total");
         rejects([&] { cart.addItem(nullptr, 1); });

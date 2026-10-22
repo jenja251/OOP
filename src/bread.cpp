@@ -10,6 +10,7 @@ Bread::Bread(const std::string& name, double pricePerKg,
     setWeightKg(weightKg);
 }
 double Bread::getPrice() const { return getBasePrice() * weightKg_; }
+std::unique_ptr<Product> Bread::clone() const { return std::make_unique<Bread>(*this); }
 void Bread::printDetails() const {
     std::cout << "Тесто: " << doughType_ << ", вес: " << weightKg_ << " кг";
 }
