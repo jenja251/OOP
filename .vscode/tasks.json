@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Create build directory",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": ["-NoProfile", "-Command", "New-Item -ItemType Directory -Force -Path '${workspaceFolder}/build' | Out-Null"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Build bakery (GCC)",
+      "type": "process",
+      "command": "C:/msys64/ucrt64/bin/g++.exe",
+      "args": ["-std=c++17", "-Wall", "-Wextra", "-Wpedantic", "-g", "-Iinclude", "src/product.cpp", "src/bread.cpp", "src/pastry.cpp", "src/cake.cpp", "src/order_item.cpp", "src/cart.cpp", "src/product_factory.cpp", "src/console_app.cpp", "src/main.cpp", "-o", "build/bakery.exe"],
+      "options": { "cwd": "${workspaceFolder}", "env": { "PATH": "C:/msys64/ucrt64/bin;${env:PATH}" } },
+      "dependsOn": "Create build directory",
+      "problemMatcher": ["$gcc"],
+      "group": { "kind": "build", "isDefault": true }
+    },
+    {
+      "label": "Run bakery",
+      "type": "process",
+      "command": "${workspaceFolder}/build/bakery.exe",
+      "options": { "cwd": "${workspaceFolder}", "env": { "PATH": "C:/msys64/ucrt64/bin;${env:PATH}" } },
+      "dependsOn": "Build bakery (GCC)",
+      "problemMatcher": []
+    }
+  ]
+}
